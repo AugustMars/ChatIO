@@ -24,10 +24,12 @@ public class HeartBeatReqHandler extends ChannelInboundHandlerAdapter{
 			System.out.println(" heatStart-- ");
 			heartBeat = ctx.executor().scheduleAtFixedRate(new heartBeatTask(ctx), 0, 5, TimeUnit.SECONDS);
 			System.out.println(" heatStart-- ");
+			ctx.fireChannelRead(msg);
 			
 		}else if(message.getHeader() != null && message.getHeader().getType() == MessageType.HEARTBEAT_RESP.value()){
 
 			System.out.println("Client receive server heart beat message: -->" + message);
+			ctx.fireChannelRead(msg);
 		}else{
 			ctx.fireChannelRead(msg);
 		}

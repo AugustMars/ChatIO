@@ -20,7 +20,9 @@ public class HeartBeatRespHandler extends ChannelInboundHandlerAdapter{
 			System.out.println("Receive client heart beat message : --> " + message);
 			IOMessage heartBeat = buildHeartBeat();
 			System.out.println("Send heart beat response message to client : --> " + heartBeat);
+			
 			ctx.writeAndFlush(heartBeat);
+			ctx.fireChannelRead(msg);
 		}else{
 			ctx.fireChannelRead(msg);
 		}

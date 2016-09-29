@@ -30,10 +30,10 @@ public class NettyServer {
 	    		
 	    		ch.pipeline().addLast(new IOMessageDecoder(1024*1024, 4, 4));
 	    		ch.pipeline().addLast(new IOMessageEncoder());
-	    		ch.pipeline().addLast("readTimeOutHandler", new ReadTimeoutHandler(50));
+	    		ch.pipeline().addLast(new ReadTimeoutHandler(50));
 	    		ch.pipeline().addLast(new LoginAuthRespHandler());
-	    		ch.pipeline().addLast("HeartBeatHandler", new HeartBeatRespHandler());
-
+	    		ch.pipeline().addLast(new HeartBeatRespHandler());
+                ch.pipeline().addLast(new MesSyncServerHandler());
 	    	 }
 		});
 	    

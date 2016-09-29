@@ -25,7 +25,6 @@ public class NettyClient {
 	
 	public void connect(String localHost, int localPort, String username, String password)throws Exception{
 		
-
 		   try{
 			   
 			LoginAuthReqHandler.username = username;
@@ -40,10 +39,9 @@ public class NettyClient {
 					
 					ch.pipeline().addLast(new IOMessageDecoder(1024*1024, 4, 4));
 					ch.pipeline().addLast(new IOMessageEncoder());
-					ch.pipeline().addLast("readTimeoutHandler", new ReadTimeoutHandler(50));
-					ch.pipeline().addLast("LoginAuthHandler", new LoginAuthReqHandler());
-					ch.pipeline().addLast("HeartBeatHandler", new HeartBeatReqHandler());
-//					ch.pipeline().addLast(new TimeClientHandler());
+					ch.pipeline().addLast(new ReadTimeoutHandler(50));
+					ch.pipeline().addLast(new LoginAuthReqHandler());
+					ch.pipeline().addLast(new HeartBeatReqHandler());
 				}; 
 			});
 			ChannelFuture future = b.connect(

@@ -45,6 +45,7 @@ public class LoginAuthReqHandler extends ChannelInboundHandlerAdapter{
 			}else{
 				System.out.println("Login is Success!!");
 				System.out.println("message -- get -- " + loginResult);
+				ChatClient.ctx = ctx;
 				
 				IOMessage message_1 = new IOMessage();
 				Header header = new Header();
