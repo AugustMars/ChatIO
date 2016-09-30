@@ -16,6 +16,13 @@ public class HeartBeatReqHandler extends ChannelInboundHandlerAdapter{
 	private volatile ScheduledFuture<?> heartBeat;
 	
 	@Override
+	public void channelActive(ChannelHandlerContext ctx) throws Exception {
+		// TODO Auto-generated method stub
+		super.channelActive(ctx);
+		System.out.println("-- ** heart beat channel active ** -- ");
+	}
+	
+	@Override
 	public void channelRead(ChannelHandlerContext ctx, Object msg){
 		
 		IOMessage message = (IOMessage) msg;

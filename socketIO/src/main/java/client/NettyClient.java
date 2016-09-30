@@ -42,6 +42,7 @@ public class NettyClient {
 					ch.pipeline().addLast(new ReadTimeoutHandler(50));
 					ch.pipeline().addLast(new LoginAuthReqHandler());
 					ch.pipeline().addLast(new HeartBeatReqHandler());
+					ch.pipeline().addLast(new MesSyncClientHandler());
 				}; 
 			});
 			ChannelFuture future = b.connect(

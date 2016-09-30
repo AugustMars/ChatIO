@@ -23,6 +23,7 @@ public class LoginAuthReqHandler extends ChannelInboundHandlerAdapter{
 	@Override
 	public void channelActive(ChannelHandlerContext ctx) throws Exception{
 		
+		//ChatClient.ctx = ctx;
 		IOMessage mes = buildLoginReq();
 		System.out.println("client send -- > " + mes);
 		ctx.writeAndFlush(mes);
@@ -45,7 +46,6 @@ public class LoginAuthReqHandler extends ChannelInboundHandlerAdapter{
 			}else{
 				System.out.println("Login is Success!!");
 				System.out.println("message -- get -- " + loginResult);
-				ChatClient.ctx = ctx;
 				
 				IOMessage message_1 = new IOMessage();
 				Header header = new Header();
@@ -58,6 +58,7 @@ public class LoginAuthReqHandler extends ChannelInboundHandlerAdapter{
 				
 				message_1.setBody(loginJson);
 				ctx.writeAndFlush(message_1);
+				
 				ctx.fireChannelRead(msg);
 			}
 		}else{
